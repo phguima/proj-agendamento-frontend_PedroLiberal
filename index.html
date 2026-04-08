@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthScheduler - Gestão de Agendamentos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app" class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <h1>🏥 HealthScheduler</h1>
+            </div>
+            <nav id="nav-user" class="hidden">
+                <button id="nav-dash-btn" class="btn-link">Início</button>
+                <button id="nav-proximas-btn" class="btn-link">Próximas</button>
+                <button id="nav-realizadas-btn" class="btn-link">Histórico</button>
+                <span id="user-display"></span>
+                <button id="logout-btn" class="btn-outline">Sair</button>
+            </nav>
+        </header>
+
+        <!-- Login / Registro -->
+        <main id="auth-section">
+            <div class="auth-card">
+                <div class="tabs">
+                    <button id="tab-login" class="active">Login</button>
+                    <button id="tab-signup">Cadastro</button>
+                </div>
+                
+                <form id="login-form">
+                    <h2>Entrar no Sistema</h2>
+                    <input type="email" id="login-email" placeholder="E-mail" required>
+                    <input type="password" id="login-password" placeholder="Senha" required>
+                    <button type="submit" class="btn-primary">Entrar</button>
+                </form>
+
+                <form id="signup-form" class="hidden">
+                    <h2>Criar Nova Conta</h2>
+                    <input type="text" id="signup-name" placeholder="Nome Completo" required>
+                    <input type="email" id="signup-email" placeholder="E-mail" required>
+                    <input type="password" id="signup-password" placeholder="Senha" required>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="signup-is-prof"> Sou Profissional de Saúde
+                        </label>
+                    </div>
+
+                    <div id="prof-extra-fields" class="hidden">
+                        <input type="text" id="signup-crm" placeholder="CRM ou Registro Profissional">
+                        <label for="signup-esp">Sua Especialidade:</label>
+                        <select id="signup-esp"></select>
+                    </div>
+
+                    <div id="client-extra-fields">
+                        <input type="text" id="signup-cpf" placeholder="Seu CPF (Ex: 123.456.789-00)">
+                        <input type="text" id="signup-phone" placeholder="Seu Telefone">
+                    </div>
+
+                    <button type="submit" class="btn-primary">Cadastrar</button>
+                </form>
+            </div>
+        </main>
+
+        <!-- Seção: Dashboard Geral -->
+        <main id="dashboard-section" class="hidden">
+            <div class="dashboard-header">
+                <h2>Todos os seus Registros</h2>
+                <button id="new-agend-btn" class="btn-primary">+ Novo Agendamento</button>
+            </div>
+            <div id="agendamentos-list" class="grid"></div>
+        </main>
+
+        <!-- Seção: Próximas Consultas -->
+        <main id="proximas-section" class="hidden">
+            <div class="dashboard-header">
+                <h2>📅 Próximas Consultas Confirmadas</h2>
+            </div>
+            <div id="proximas-list" class="grid"></div>
+        </main>
+
+        <!-- Seção: Consultas Realizadas (NOVA) -->
+        <main id="realizadas-section" class="hidden">
+            <div class="dashboard-header">
+                <h2>✅ Histórico de Consultas Realizadas</h2>
+                <p>Agendamentos concluídos ou de datas passadas.</p>
+            </div>
+            <div id="realizadas-list" class="grid"></div>
+        </main>
+
+        <!-- Modal de Novo/Editar Agendamento -->
+        <div id="agend-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modal-title">Novo Agendamento</h2>
+                <form id="agend-form">
+                    <input type="hidden" id="edit-id">
+                    <label for="prof-select">Profissional:</label>
+                    <select id="prof-select" required></select>
+                    <label for="agend-date">Data e Hora:</label>
+                    <input type="datetime-local" id="agend-date" required>
+                    <label for="agend-obs">Observações:</label>
+                    <textarea id="agend-obs" placeholder="Ex: Primeira consulta de rotina"></textarea>
+                    <button type="submit" class="btn-primary">Confirmar Agendamento</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="api.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
